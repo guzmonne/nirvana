@@ -1,4 +1,3 @@
-import http from "http"
 import request from "supertest"
 import nock from "nock"
 
@@ -99,7 +98,7 @@ describe("createAPIServer", () => {
       })
   })
 
-  for (let [strategyName] of __STRATEGIES_MAP) {
+  for (const [strategyName] of __STRATEGIES_MAP) {
     test(`should return a result using the ${strategyName} strategy`, async (done) => {
       const strategy = new Strategy(strategyName)
       const path = `/?member_id=1`
@@ -139,28 +138,6 @@ describe("createAPIServer", () => {
  * random returns a random integer value between 0 and `max`
  * @param max - Max integer value.
  */
-function random(max: number = 100000): number {
+function random(max = 100000): number {
   return parseInt((Math.random() * max).toFixed(0), 10)
-}
-/**
- * createMockAPI returns a mock API that conforms with the external
- * API interfaces.
- * @param body - Body to return on each request.
- * @param error - Error string to return if we want to simulate an error.
- */
-export function createMockAPI(body?: any, error?: string) {
-  const server = http.createServer(async (_, res) => {
-    if (error) {
-      res.writeHead(400, "Error", { "Content-Type": "application/json" })
-      res.end(JSON.stringify({ error }))
-    }
-    res.writeHead(200, "Ok", { "Content-Type": "application/json" })
-    res.end(JSON.stringify(body ? body : {
-      deductible: random(),
-      stop_loss: random(),
-      oop_max: random(),
-    }))
-  })
-
-  return server
 }

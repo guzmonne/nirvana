@@ -81,6 +81,6 @@ describe("Strategy()", () => {
 /**
  * HELPER FUNCTIONS
  */
-function random(max: number = 100000): number {
+function random(max = 100000): number {
   return parseInt((Math.random() * max).toFixed(0), 10)
 }

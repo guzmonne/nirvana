@@ -88,7 +88,7 @@ export class Strategy implements Strategy {
 /**
  * API
  */
-export function createAPIServer(externalAPIs: string[]) {
+export function createAPIServer(externalAPIs: string[]): http.Server {
   const server = http.createServer(async (req, res) => {
     try {
       const baseURL = 'http://' + req.headers.host + '/';
@@ -179,6 +179,6 @@ function checkStatus(response: Response) {
  * when the environment variable `DEBUG` is set.
  * @param args - Any `debug` valid argument.
  */
-function debug(...args: any[]) {
+function debug(...args: string[]) {
   if (process.env.DEBUG) console.error(...args)
 }
