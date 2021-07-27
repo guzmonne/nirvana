@@ -59,7 +59,8 @@ export const sumStrategy: StrategyFunc = (...numbers) => numbers.reduce((acc, nu
  */
 export const averageStrategy: StrategyFunc = (...numbers) => numbers.length === 0 ? 0 : sumStrategy(...numbers) / numbers.length
 /**
- * STRATEGIES MAP
+ * __STRATEGIES_MAP is a constant that holds a reference to all the
+ * available strategies by name.
  */
 export const __STRATEGIES_MAP: StrategyMap = new Map<string, StrategyFunc>([
   ["min", minStrategy],
@@ -86,7 +87,9 @@ export class Strategy implements Strategy {
   coalesce: StrategyFunc
 }
 /**
- * API
+ * createAPIServer returns an http.Server configured to respond to the
+ * coalesce endpoint.
+ * @param externalAPIs - The list of external APIs to interact with.
  */
 export function createAPIServer(externalAPIs: string[]): http.Server {
   const server = http.createServer(async (req, res) => {
